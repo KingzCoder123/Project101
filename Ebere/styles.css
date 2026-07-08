@@ -6,9 +6,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=IM+Fell+French+Canon:ital@0;1&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Jomolhari&family=Kaisei+Tokumin&family=Poppins:wght@400;500;700&display=swap'); /* to use for About us Jomolhari  */
 
-/* ==========================================================================
-   1. Reset & Base Styles
-   ========================================================================== */
 * {
     margin: 0;
     padding: 0;
@@ -18,13 +15,15 @@
 
 body {
     min-height: 100vh;
-    background-color: #1a0d0a;
+    background-color: #1a0d0a; /* Dark chocolate theme background base */
     color: #ffffff;
     overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 /* ==========================================================================
-   2. Header & Navigation (Matching Screenshot 2026-07-04 at 00.41.52.jpg)
+   3. Header & Navigation
    ========================================================================== */
 header {
     position: fixed;
@@ -54,8 +53,7 @@ header nav {
     display: flex;
     align-items: center;
     gap: 10px;
-     margin-right: -7%;
-     padding-bottom: -15px;
+    margin-right: -7%;
 }
 
 header nav a {
@@ -63,8 +61,8 @@ header nav a {
     text-decoration: none;
     font-size: 0.95rem;
     font-weight: 600;
-    padding: 5px 10px;
-    border-radius: 10px;
+    padding: 6px 14px;
+    border-radius: 20px; /* Clean capsule look matching your screenshots */
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -78,12 +76,11 @@ header nav a:hover:not(.active) {
 }
 
 /* ==========================================================================
-   3. Landing / Hero Section
+   4. Landing / Hero Section
    ========================================================================== */
 .landing {
     width: 100%;
     height: 100vh;
-    /* Darkened overlay combined with a background image placeholder */
     background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
                 url('Resources/Background.jpg') no-repeat center center/cover;
     display: flex;
@@ -92,13 +89,13 @@ header nav a:hover:not(.active) {
     align-items: center;
     text-align: center;
     padding: 0 20px;
-    padding-top: 80px; /* Offset for the fixed header */
-    opacity: 80%; /* Slightly transparent for a subtle effect */
+    padding-top: 80px; /* Offset for fixed header */
+    opacity: 0.8; /* Fixed opacity format syntax */
 }
 
 /* Elegant serif font style for the hero text */
-.landing h1 {
-    font-family: 'IM FELL French Canon';
+.landing-word h1 {
+    font-family: 'IM FELL French Canon', serif;
     font-size: 4.5rem;
     font-weight: 400;
     color: #ffffff;
@@ -106,16 +103,22 @@ header nav a:hover:not(.active) {
     letter-spacing: 4px;
     margin-bottom: 30px;
     text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.6);
-    opacity: 95%;
+}
+
+.landing-buttons {
+    display: flex;
+    gap: 20px; /* Space between the two buttons */
+    justify-content: center; /* Centers the buttons horizontally */
+    align-items: center;
+    margin-top: 10px;
 }
 
 /* Rounded, elegant pill-shaped Menu button */
-.landing .btn {
-    font-family: 'Playfair Display', 'Georgia', serif;
+.landing-buttons .btn {
     display: inline-block;
     color: #ffffff;
     text-decoration: none;
-    background-color: #0c0807; /* Dark button background */
+    background-color: #0c0807; 
     padding: 12px 35px;
     font-size: 1.2rem;
     text-transform: uppercase;
@@ -132,24 +135,287 @@ header nav a:hover:not(.active) {
 }
 
 /* ==========================================================================
-   4. Responsive Adjustments
+   5. Menu Grid Layout
    ========================================================================== */
+.menu-container {
+    max-width: 1400px;
+    width: 95%;        
+    margin: 0 auto;
+    /* FIX: Added 140px top padding to safely clear the fixed header, and 60px bottom to prevent floor cutoff */
+    padding: 140px 20px 60px 20px; 
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr)); 
+    gap: 25px;         
+    box-sizing: border-box;
+}
+
+/* --- Menu Card Styles --- */
+.menu-item {
+    background-color: #c08253; 
+    border-radius: 12px;
+    padding: 25px 15px;
+    display: flex;
+    flex-direction: column;   /* Stacks everything vertically */
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* FIX: Image goes strictly to the top of the stack flow */
+.menu-item img {
+    width: 100%;
+    max-width: 140px;      
+    aspect-ratio: 1 / 1;   /* Keeps all sizes identically square */
+    object-fit: contain;   
+    margin-bottom: 15px;
+    order: 1;              /* Dictates structural order stack position 1 */
+}
+
+/* FIX: Title maps directly below the image */
+.menu-item h2 {
+    font-family: 'Kaisei Tokumin', serif;
+    font-size: 1.1rem;     
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #ffffff;
+    width: 100%;
+    min-height: 2.5rem;    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    order: 2;              /* Dictates structural order stack position 2 */
+}
+
+/* FIX: Price Badge maps perfectly to the bottom of the card floor */
+.menu-item span {
+    background-color: #2b110c; 
+    color: #ffffff;
+    opacity: 80%;
+    width: 100%;
+    padding: 12px 0;
+    font-weight: bold;
+    font-size: 1.1rem;
+    border-radius: 6px;
+    letter-spacing: 0.5px;
+    margin-top: auto;      /* Pushes up away from content above to lock down */
+    order: 3;              /* Dictates structural order stack position 3 */
+}
+/* --- Special Promotion Card --- */
+.menu-advert {
+    background-color: #c08253;
+    border: 3px solid #2b110c; 
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+}
+
+.menu-advert h2 {
+    background-color: #2b110c;
+    width: 100%;
+    height: 100%;
+    padding: 25px 15px;
+    border-radius: 8px;
+    font-size: 1.05rem;
+    font-weight: bold;
+    line-height: 1.5;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+
+}
+
+/* ==========================================================================
+   7. About Us Section Styling
+   ========================================================================== */
+.about-section {
+    max-width: 900px;
+    margin: 0 auto;
+    /* Extra top padding so it doesn't hide behind the fixed header, bottom padding for the footer gap */
+    padding: 160px 20px 80px 20px; 
+    text-align: center;
+    background-color: #ffffff; /* White center container backdrop from the image */
+    color: #3d1c16; /* Dark brown text color */
+    min-height: calc(100vh - 150px); /* Pushes the footer cleanly down to the window bottom */
+}
+/* --- Full-Width White Page Override --- */
+body.white-page {
+    background-color: #ffffff; /* Forces the entire screen canvas to be white */
+}
+
+/* Ensure the about section fills the space nicely */
+body.white-page .about-section {
+    width: 100%;
+    max-width: 100%; /* Removes side restrictions on the container wrapper */
+    background-color: #ffffff;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+.about-section h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+    color: #3C1515;
+}
+
+.about-section p {
+    font-family: 'Jomolhari', serif; /* The exact serif font specified in your code comments */
+    font-size: 1.25rem;
+    line-height: 1.8;
+    max-width: 800px;
+    margin: 0 auto 40px auto;
+    text-align: center;
+}
+
+.about-section h2 {
+    font-family: 'IM Fell French Canon', serif; /* Elegant tagline font from your font imports */
+    font-size: 2rem;
+    font-weight: 400;
+    color: #3C1515;
+    margin-top: 20px;
+    letter-spacing: 1px;
+}
+
+/* ==========================================================================
+   8. Footer Section Styling
+   ========================================================================== */
+.footer-section {
+    background-color: #3C1515; /* Matching dark cinnamon footer banner */
+    color: #ffffff;
+    padding: 30px 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    margin-top: auto; /* Attaches to structural bottom edge */
+}
+
+/* Left alignment column layout for contacts */
+.footer-section .contacts-column {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.footer-section .contact-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.1rem;
+}
+
+.footer-section .contact-row i {
+    font-size: 1.6rem; /* Increases Boxicon display size safely */
+    color: #ffffff;
+}
+
+.footer-section .contact-row a {
+    color: #ffffff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+/* Central fine-print copyright label */
+.footer-section .copyright {
+    font-size: 0.95rem;
+    opacity: 0.7;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%); /* Keeps copyright perfectly mathematically centered */
+}
+
+/* Right-aligned text block */
+.footer-section .delivery-info {
+    text-align: right;
+    font-size: 0,8rem;
+    font-weight: bold;
+    line-height: 0.8;
+}
+
+/* ==========================================================================
+   Responsive Viewport Breakpoints
+   ========================================================================== */
+
+@media (max-width: 1200px) {
+    .menu-container { 
+        grid-template-columns: repeat(4, 1fr); 
+    }
+}
+
+@media (max-width: 992px) {
+    .menu-container { 
+        grid-template-columns: repeat(3, 1fr); 
+    }
+    .landing h1 { 
+        font-size: 3.5rem; 
+    }
+}
+
+/* COMBINED: All 768px tablet & mobile rules sit perfectly together here */
 @media (max-width: 768px) {
+    /* Header adjustments */
     header {
         padding: 15px 5%;
     }
-    
     header .logo {
-        font-size: 1.1rem;
+        margin-left: 0;
     }
-    
-    header nav a {
-        padding: 6px 12px;
-        font-size: 0.85rem;
+    header nav {
+        margin-right: 0;
     }
 
+    /* Landing/Hero adjustment */
     .landing h1 {
-        font-size: 2.8rem;
+        font-size: 2.5rem;
         letter-spacing: 2px;
+    }
+
+    /* Menu Grid adjustment */
+    .menu-container { 
+        grid-template-columns: repeat(2, 1fr); 
+        padding-top: 160px; 
+    }
+
+    /* About Section adjustments */
+    .about-section {
+        padding-top: 140px;
+    }
+    .about-section p {
+        font-size: 1.1rem;
+    }
+    .about-section h2 {
+        font-size: 1.6rem;
+    }
+
+    /* Footer Layout adjustments */
+    .footer-section {
+        flex-direction: column;
+        gap: 25px;
+        text-align: center;
+        padding: 40px 20px;
+    }
+    .footer-section .copyright {
+        position: static;
+        transform: none;
+        order: 3;
+    }
+    .footer-section .delivery-info {
+        text-align: center;
+        order: 1;
+    }
+    .footer-section .contacts-column {
+        align-items: center;
+        order: 2;
+    }
+}
+
+@media (max-width: 480px) {
+    .menu-container { 
+        grid-template-columns: 1fr; 
     }
 }
