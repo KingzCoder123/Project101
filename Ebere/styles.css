@@ -21,13 +21,12 @@ body {
     background-color: #1a0d0a;
     color: #ffffff;
     overflow-x: hidden;
-    /* Forces the footer to sit neatly at the bottom when text is short */
     display: flex;
     flex-direction: column; 
 }
 
 /* ==========================================================================
-   2. Header & Navigation
+   2. Header & Navigation (Desktop Layout)
    ========================================================================== */
 header {
     position: fixed;
@@ -35,7 +34,7 @@ header {
     left: 0;
     width: 100%;
     padding: 20px 8%;
-    background-color: #3C1515; /* Deep cinnamon brown */
+    background-color: #3C1515; 
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -50,14 +49,12 @@ header .logo {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
-    margin-left: -7%;
 }
 
 header nav {
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-right: -7%;
 }
 
 header nav a {
@@ -71,11 +68,23 @@ header nav a {
 }
 
 header nav a.active {
-    background-color: #583126; /* Lighter warm brown accent */
+    background-color: #583126; 
 }
 
 header nav a:hover:not(.active) {
     background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Hide toggle checkbox and hamburger trigger button on desktop views */
+#menu-toggle {
+    display: none;
+}
+
+.hamburger-menu {
+    display: none;
+    color: #ffffff;
+    font-size: 2rem;
+    cursor: pointer;
 }
 
 /* ==========================================================================
@@ -107,10 +116,18 @@ header nav a:hover:not(.active) {
     text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.6);
 }
 
+/* Holds the CTA links together cleanly */
+.button-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+}
+
 .landing .btn {
     font-family: 'Playfair Display', 'Georgia', serif;
     display: inline-block;
-    margin: 0 15px; /* Clean spacing between buttons */
     color: #ffffff;
     text-decoration: none;
     background-color: #0c0807;
@@ -122,6 +139,7 @@ header nav a:hover:not(.active) {
     border: 1px solid rgba(255, 255, 255, 0.2);
     transition: background-color 0.3s ease, transform 0.2s ease;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    white-space: nowrap;
 }
 
 .landing .btn:hover {
@@ -138,7 +156,7 @@ header nav a:hover:not(.active) {
     gap: 20px;
     max-width: 95%;      
     width: 100%;         
-    margin: 150px auto 60px auto; /* Increased top margin so cards aren't cut off */
+    margin: 150px auto 60px auto; 
 }
 
 .menu-item {
@@ -215,6 +233,10 @@ header nav a:hover:not(.active) {
 /* ==========================================================================
    5. About Us Content Section
    ========================================================================== */
+.about-page {
+    background-color: #ffffff; 
+}
+
 .about-section {
     max-width: 950px;
     margin: 160px auto 80px auto; 
@@ -230,10 +252,7 @@ header nav a:hover:not(.active) {
     margin-bottom: 30px;
     text-transform: capitalize;
 }
-.about-page {
-    background-color: #ffffff; 
-    
-}
+
 .about-section p {
     font-family: 'Jomolhari', serif;
     color: #6a2814; 
@@ -251,7 +270,6 @@ header nav a:hover:not(.active) {
     letter-spacing: 1px;
 }
 
-
 /* ==========================================================================
    6. Footer Area
    ========================================================================== */
@@ -259,12 +277,9 @@ header nav a:hover:not(.active) {
     background-color: #3C1515; 
     color: #ffffff;
     padding: 35px 8%;
-    
-    /* Configures a balanced 3-column grid layout */
     display: grid;
     grid-template-columns: 1fr auto 1fr; 
     align-items: center;
-    
     position: relative;
     margin-top: auto; 
     box-sizing: border-box;
@@ -302,7 +317,6 @@ header nav a:hover:not(.active) {
     font-size: 1.5rem; 
 }
 
-/* Aligns the copyright text strictly in the middle column */
 .footer-section .copyright {
     grid-column: 2; 
     text-align: center;
@@ -312,7 +326,6 @@ header nav a:hover:not(.active) {
     white-space: nowrap; 
 }
 
-/* Aligns the pickup notice strictly to the right column */
 .footer-section .delivery {
     grid-column: 3;
     text-align: right;
@@ -321,57 +334,134 @@ header nav a:hover:not(.active) {
     margin: 0;
 }
 
-/* Responsiveness helper for smaller screens */
+/* ==========================================================================
+   7. Responsive Layout Media Queries (Mobile View & Adjustments)
+   ========================================================================== */
+@media (max-width: 1024px) {
+    .menu-container {
+        grid-template-columns: repeat(3, minmax(180px, 1fr));
+        margin-top: 120px;
+    }
+}
+
 @media (max-width: 768px) {
+    /* Header & Hamburger Transformations */
+    header {
+        padding: 15px 6%;
+    }
+    
+    header .logo {
+        font-size: 1.1rem;
+    }
+
+    .hamburger-menu {
+        display: block; /* Shows hamburger icon on mobile viewports */
+    }
+
+    header nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: #3C1515;
+        flex-direction: column;
+        gap: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    header nav a {
+        width: 100%;
+        text-align: center;
+        padding: 15px 0;
+        border-radius: 0;
+    }
+
+    header nav a.active {
+        background-color: #583126;
+    }
+
+    /* Reveals mobile layout cleanly when checkbox toggle is active */
+    #menu-toggle:checked ~ nav {
+        max-height: 300px;
+    }
+
+    /* Landing Text Responsive Resizing */
+    .landing h1 {
+        font-size: 2.6rem;
+        letter-spacing: 2px;
+        margin-bottom: 25px;
+    }
+
+    /* Keeps Landing Page buttons strictly side-by-side on mobile screens */
+    .button-group {
+        flex-direction: row; 
+        gap: 10px;
+        padding: 0 10px;
+    }
+
+    .landing .btn {
+        padding: 10px 20px;
+        font-size: 0.95rem;
+        letter-spacing: 1px;
+        flex: 1; /* Forces shared horizontal distribution balance */
+        max-width: 180px;
+    }
+
+    /* Adaptive Cards Framework */
+    .menu-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        margin-top: 100px;
+        padding: 0 8px;
+    }
+
+    .menu-item img {
+        height: 100px;
+    }
+
+    .menu-item h2 {
+        font-size: 0.95rem;
+        height: auto;
+        min-height: 38px;
+    }
+
+    .menu-item span {
+        font-size: 0.95rem;
+        padding: 8px 0;
+    }
+
+    /* Clean Multi-row Stack for Footer */
     .footer-section {
         grid-template-columns: 1fr;
-        gap: 20px;
+        gap: 24px;
         text-align: center;
+        padding: 30px 5%;
     }
+    
     .footer-contacts, 
     .footer-section .copyright, 
     .footer-section .delivery {
         grid-column: 1;
         text-align: center;
         justify-content: center;
-    }
-}
-/* ==========================================================================
-   7. Responsive Layout Media Queries
-   ========================================================================== */
-@media (max-width: 1024px) {
-    .menu-container {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    }
-}
-
-@media (max-width: 768px) {
-    header {
-        padding: 15px 5%;
-    }
-    
-    header .logo {
-        font-size: 1.1rem;
-    }
-    
-    header nav a {
-        padding: 6px 12px;
-        font-size: 0.85rem;
-    }
-
-    .landing h1 {
-        font-size: 2.8rem;
-        letter-spacing: 2px;
-    }
-
-    .footer-section {
-        flex-direction: column;
-        gap: 25px;
-        text-align: center;
-    }
-    
-    .footer-contacts, .footer-info {
         align-items: center;
-        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Responsive configuration for very narrow phone screen wrappers */
+    .menu-container {
+        grid-template-columns: 1fr;
+    }
+    .button-group {
+        flex-wrap: nowrap;
+    }
+    .landing .btn {
+        padding: 10px 14px;
+        font-size: 0.85rem;
     }
 }
